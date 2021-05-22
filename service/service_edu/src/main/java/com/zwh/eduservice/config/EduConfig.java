@@ -1,15 +1,26 @@
 package com.zwh.eduservice.config;
 
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan("com.zwh.eduservice.mapper")
 public class EduConfig {
-//    高版本不用配置逻辑删除插件了
-//    @Bean
-//    public ISqlInjector sqlInjector(){
-//        return new LogicSqlInjector();
-//        }
-//    }
+    //逻辑删除插件，高版本MP不用配置
+    @Bean
+    public ISqlInjector sqlInjector() {
+        return new LogicSqlInjector();
+    }
+
+    //分页插件
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
+    }
+
+
 }

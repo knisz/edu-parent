@@ -22,29 +22,39 @@
             <artifactId>service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-<!--        这些暂时用不到，先注释-->
+        <dependency>
+            <groupId>com.zwh</groupId>
+            <artifactId>service_base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 <!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
+<!--            <groupId>com.zwh</groupId>-->
+<!--            <artifactId>common_utils</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
 <!--        </dependency>-->
 
-<!--        &lt;!&ndash;hystrix依赖，主要是用  @HystrixCommand&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
-<!--        </dependency>-->
+        <!--        这些暂时用不到，先注释-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
+        <!--        </dependency>-->
 
-<!--        &lt;!&ndash;服务注册&ndash;&gt;-->
-<!--         <dependency>-->
-<!--             <groupId>org.springframework.cloud</groupId>-->
-<!--             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--         </dependency>-->
-<!--        &lt;!&ndash;服务调用&ndash;&gt;-->
-<!--         <dependency>-->
-<!--             <groupId>org.springframework.cloud</groupId>-->
-<!--             <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-<!--         </dependency>-->
+        <!--        &lt;!&ndash;hystrix依赖，主要是用  @HystrixCommand&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        &lt;!&ndash;服务注册&ndash;&gt;-->
+        <!--         <dependency>-->
+        <!--             <groupId>org.springframework.cloud</groupId>-->
+        <!--             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+        <!--         </dependency>-->
+        <!--        &lt;!&ndash;服务调用&ndash;&gt;-->
+        <!--         <dependency>-->
+        <!--             <groupId>org.springframework.cloud</groupId>-->
+        <!--             <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+        <!--         </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,9 +128,10 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.4.5</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

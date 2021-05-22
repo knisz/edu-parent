@@ -1,4 +1,4 @@
-package com.zwh.demo;
+package com.zwh.eduservice;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -9,12 +9,15 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 /**
  * @author  zwh
  * @since 2018/12/13
  */
+@SpringBootTest
 public class CodeGenerator {
 
     @Test
@@ -40,7 +43,7 @@ public class CodeGenerator {
 
         // 3、数据源配置  ***
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/school_project?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://localhost:3306/school_project?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("");
@@ -50,7 +53,7 @@ public class CodeGenerator {
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.zwh");                   //包名     ***
-        pc.setModuleName("eduservice");            //模块名
+        pc.setModuleName("com/zwh/eduservice");            //模块名
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
