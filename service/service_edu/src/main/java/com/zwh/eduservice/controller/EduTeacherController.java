@@ -24,9 +24,19 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/teacher")
+@CrossOrigin    //解决跨域问题 协议 ip 端口号 三者有一个就会产生跨域
 public class EduTeacherController {
     @Autowired
     private EduTeacherService teacherService;
+
+    @GetMapping("/getTeacher/{id}")
+    public R getTeacher(@PathVariable(name = "id") String id) {
+        EduTeacher teacher = teacherService.getById(id);
+
+        return R.ok().data("teacher", teacher);
+    }
+
+
 
     @GetMapping("/findAll")
     public R findAllTeacher() {
@@ -35,6 +45,7 @@ public class EduTeacherController {
         return R.ok().data("items", list);
     }
 
+    //分页
     @GetMapping("/pageTeacher/{current}/{limit}")
     public R findPage(@PathVariable(name = "current") int current,
                       @PathVariable(name = "limit") int limit) {
@@ -50,6 +61,7 @@ public class EduTeacherController {
 //        return R.ok().data(map);
     }
 
+    //条件查询+分页
     @PostMapping("/pageTeacherCondition/{current}/{limit}")
     public R findPageCondition(@PathVariable(name = "current") int current,
                                @PathVariable(name = "limit") int limit,
@@ -72,12 +84,14 @@ public class EduTeacherController {
         if (!StringUtils.isEmpty(end)) {
             queryWrapper.le("gmt_create", end);
         }
+        //排序
+        queryWrapper.orderByDesc("gmt_modified");
 
         teacherService.page(pageTeacher, queryWrapper);
         return R.ok().data("items", pageTeacher);//法1
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addTeacher")
     public R AddTeacher(@RequestBody EduTeacher teacher) {
         if (teacherService.save(teacher)) {
             return R.ok();
@@ -93,7 +107,8 @@ public class EduTeacherController {
         return R.error();
     }
 
-    @PutMapping("/{id}")
+    //讲师修改
+    @PutMapping("/updateTeacher/{id}")
     public R updateTeacher(@PathVariable String id,
                            @RequestBody EduTeacher teacher) {
         teacher.setId(id);
