@@ -37,10 +37,10 @@ public class EduCourse implements Serializable {
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
 
-    @ApiModelProperty(value = "课程专业ID")
+    @ApiModelProperty(value = "二级分类ID")
     private String subjectId;
 
-    @ApiModelProperty(value = "课程专业父级ID")
+    @ApiModelProperty(value = "一级分类ID")
     private String subjectParentId;
 
     @ApiModelProperty(value = "课程标题")
@@ -62,13 +62,13 @@ public class EduCourse implements Serializable {
     private Long viewCount;
 
     @ApiModelProperty(value = "乐观锁")
-    private Long version;
+    private Integer version;
 
     @ApiModelProperty(value = "课程状态 Draft未发布  Normal已发布")
     private String status;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    private Integer isDeleted;
+    private Boolean isDeleted;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
