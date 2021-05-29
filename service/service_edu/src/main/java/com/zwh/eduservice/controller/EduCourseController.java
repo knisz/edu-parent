@@ -9,13 +9,15 @@ import com.zwh.eduservice.service.EduCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 前端控制器
  * </p>
  *
  * @author testjava
- * @since 2020-03-02
+ * @since 2020-05-27
  */
 @RestController
 @RequestMapping("/eduservice/course")
@@ -24,6 +26,17 @@ public class EduCourseController {
 
     @Autowired
     private EduCourseService courseService;
+
+
+    //课程列表 基本实现
+    //TODO  完善条件查询带分页
+    @GetMapping
+    public R getCourseList() {
+        List<EduCourse> list = courseService.list(null);
+        return R.ok().data("list",list);
+    }
+
+
 
     //添加课程基本信息的方法
     @PostMapping("addCourseInfo")

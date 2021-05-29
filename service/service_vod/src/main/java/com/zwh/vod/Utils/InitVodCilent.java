@@ -1,9 +1,10 @@
-package com.zwh.vodtest;
+package com.zwh.vod.Utils;
 
+import com.aliyun.oss.ClientException;
 import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
-public class InitObject {
+
+public class InitVodCilent {
 
     public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {
         String regionId = "cn-shanghai";  // 点播服务接入区域

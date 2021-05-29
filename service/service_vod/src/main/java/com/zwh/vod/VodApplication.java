@@ -1,4 +1,4 @@
-package com.zwh.oss;
+package com.zwh.vod;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,12 +6,12 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class) //不启用数据库，不添加该注解无法启动
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.zwh"})
-@EnableDiscoveryClient  //nacos注册
-public class OssApplication {
+public class VodApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OssApplication.class, args);
+        SpringApplication.run(VodApplication.class, args);
     }
 }

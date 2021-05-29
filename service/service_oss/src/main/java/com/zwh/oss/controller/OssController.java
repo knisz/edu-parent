@@ -23,8 +23,8 @@ public class OssController {
         return R.ok().data("url",url);
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
+//    @GetMapping("/hello")
+//    public String hello(){
+//        return "hello";
+//    }
 }

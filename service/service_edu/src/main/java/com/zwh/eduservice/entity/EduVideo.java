@@ -67,7 +67,7 @@ public class EduVideo implements Serializable {
     private Long size;
 
     @ApiModelProperty(value = "乐观锁")
-    private Long version;
+    private Integer version;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
