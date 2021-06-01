@@ -14,36 +14,30 @@ import java.util.Date;
  * @since 2019/10/16
  */
 public class JwtUtils {
-//    @Value("${aliyun.APP_SECRET}")
-//    private static String APP_SECRET;
 
-    public static final long EXPIRE = 1000 * 60 * 60 * 24;  //过期时间
-    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO";   //秘钥，用于生产token
+    //常量
+    public static final long EXPIRE = 1000 * 60 * 60 * 24; //token过期时间
+    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
 
+    //生成token字符串的方法
     public static String getJwtToken(String id, String nickname){
 
-        System.out.println(APP_SECRET);
-
         String JwtToken = Jwts.builder()
-                //JWT头
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
-                .setSubject("guli-user")    //分类
-                .setIssuedAt(new Date())    //过期时间
+
+                .setSubject("guli-user")
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
 
-                //有效载荷,token主体，存储用户信息
-                .claim("id", id)
+                .claim("id", id)  //设置token主体部分 ，存储用户信息
                 .claim("nickname", nickname)
 
-                //签名哈希
                 .signWith(SignatureAlgorithm.HS256, APP_SECRET)
                 .compact();
 
         return JwtToken;
     }
-
-
 
     /**
      * 判断token是否存在与有效
@@ -79,7 +73,7 @@ public class JwtUtils {
     }
 
     /**
-     * 根据token获取会员id
+     * 根据token字符串获取会员id
      * @param request
      * @return
      */
