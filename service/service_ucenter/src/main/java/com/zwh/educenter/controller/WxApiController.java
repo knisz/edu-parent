@@ -1,21 +1,26 @@
 package com.zwh.educenter.controller;
 
+import com.google.gson.Gson;
 import com.zwh.commonutils.JwtUtils;
 import com.zwh.educenter.entity.UcenterMember;
 import com.zwh.educenter.service.UcenterMemberService;
 import com.zwh.educenter.utils.ConstantWxUtils;
 import com.zwh.educenter.utils.HttpClientUtils;
 import com.zwh.servicebase.exceptionhandler.MyException;
-import com.google.gson.Gson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
 
 @CrossOrigin
 @Controller  //只是请求地址，不需要返回数据
+@Api(tags="微信登陆模块")
 @RequestMapping("/api/ucenter/wx")
 public class WxApiController {
 
@@ -23,6 +28,7 @@ public class WxApiController {
     private UcenterMemberService memberService;
 
     //2 获取扫描人信息，添加数据
+    @ApiOperation("回调函数，获取扫描人信息，添加数据")
     @GetMapping("callback")
     public String callback(String code, String state) {
         try {
@@ -92,6 +98,7 @@ public class WxApiController {
     }
 
     //1 生成微信扫描二维码
+    @ApiOperation("生成微信扫描二维码")
     @GetMapping("login")
     public String getWxCode() {
         //固定地址，后面拼接参数

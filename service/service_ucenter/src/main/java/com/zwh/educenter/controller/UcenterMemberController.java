@@ -3,9 +3,13 @@ package com.zwh.educenter.controller;
 
 import com.zwh.commonutils.JwtUtils;
 import com.zwh.commonutils.R;
+import com.zwh.commonutils.ordervo.UcenterMemberOrder;
 import com.zwh.educenter.entity.UcenterMember;
 import com.zwh.educenter.entity.vo.RegisterVo;
 import com.zwh.educenter.service.UcenterMemberService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2020-05-30
  */
 @RestController
+@Api(tags="用户管理模块")
 @RequestMapping("/educenter/member")
 @CrossOrigin
 public class UcenterMemberController {
@@ -29,6 +34,7 @@ public class UcenterMemberController {
 
     //登录
     @PostMapping("login")
+    @ApiOperation("登陆")
     public R loginUser(@RequestBody UcenterMember member) {
         //member对象封装手机号和密码
         //调用service方法实现登录
@@ -39,12 +45,14 @@ public class UcenterMemberController {
 
     //注册
     @PostMapping("register")
+    @ApiOperation("注册")
     public R registerUser(@RequestBody RegisterVo registerVo) {
         memberService.register(registerVo);
         return R.ok();
     }
 
     //根据token获取用户信息
+    @ApiOperation("根据token获取用户信息")
     @GetMapping("getMemberInfo")
     public R getMemberInfo(HttpServletRequest request) {
         //调用jwt工具类的方法。根据request对象获取头信息，返回用户id
@@ -54,5 +62,26 @@ public class UcenterMemberController {
         UcenterMember member = memberService.getById(memberId);
         return R.ok().data("userInfo",member);
     }
+
+    //根据id查询用户信息
+    @ApiOperation("根据id查询用户信息")
+    @PostMapping("getUserInfoOrder/{id}")
+    public UcenterMemberOrder getUserInfoOrder(@PathVariable String id){
+        UcenterMember member = memberService.getById(id);
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member,ucenterMemberOrder);    //复制
+        return ucenterMemberOrder;
+    }
+
+    //查询某一天的注册人数
+    @ApiOperation("统计每天注册人数")
+    @GetMapping("countRegister/{day}")
+    public R countRegister(@PathVariable String day){
+        Integer count = memberService.countRegister(day);
+        return R.ok().data("countRegister",count);
+
+    }
+
+
 }
 
