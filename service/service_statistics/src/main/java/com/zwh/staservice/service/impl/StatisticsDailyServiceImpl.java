@@ -11,6 +11,11 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 网站统计日数据 服务实现类
@@ -49,5 +54,44 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
 
         baseMapper.insert(sta);
 
+    }
+
+    //查询统计数据表格
+    @Override
+    public Map<String, Object> getShowData(String type, String begin, String end) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.between("date_calculated", begin, end);
+        wrapper.select("date_calculated",type);
+        List<StatisticsDaily> statisticsDailies = baseMapper.selectList(wrapper);
+
+        List<String> dataCalculatedList = new ArrayList<>();
+        List<Integer> numDataList = new ArrayList<>();
+
+        statisticsDailies.forEach((StatisticsDaily daily)->{
+            //封装日期list集合
+            dataCalculatedList.add(daily.getDateCalculated());
+            //封装对应数量
+            switch (type) {
+                case "login_num":
+                    numDataList.add(daily.getLoginNum());
+                    break;
+                case "register_num":
+                    numDataList.add(daily.getRegisterNum());
+                    break;
+                case "video_view_num":
+                    numDataList.add(daily.getVideoViewNum());
+                    break;
+                case "course_num":
+                    numDataList.add(daily.getCourseNum());
+                    break;
+                default:
+                    break;
+            }
+        });
+        //把封装之后两个list集合放到map集合，进行返回
+        Map<String, Object> map = new HashMap<>();
+        map.put("date_calculatedList",dataCalculatedList);
+        map.put("numDataList",numDataList);
+        return map;
     }
 }

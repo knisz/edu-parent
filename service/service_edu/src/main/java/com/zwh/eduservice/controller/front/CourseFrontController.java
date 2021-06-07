@@ -55,8 +55,8 @@ public class CourseFrontController {
         //查询用户是否购买此课程 TODO
         String memberIdByJwtToken = JwtUtils.getMemberIdByJwtToken(request);
         //boolean buyCourse = ordersClient.isBuyCourse(courseId, memberIdByJwtToken);
-        //boolean buyCourse = false;
-        boolean buyCourse = ordersClient.isBuy();
+        boolean buyCourse = false;
+        //boolean buyCourse = ordersClient.isBuy();
 
         return R.ok().data("courseWebVo",courseWebVo)
                 .data("chapterVideoList",chapterVideoList)
